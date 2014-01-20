@@ -1,12 +1,16 @@
 package algorithm.mergesort;
  
-// Class definition for ListNode
+// Class definition for a node in the list
 class ListNode {
-  int val;
+  // value in current node
+  int valueOfNode;
+  
+  // Next node
   ListNode next;
- 
-  ListNode(int x) {
-    val = x;
+  
+  // Constructor of a single node
+  ListNode(int givenValue) {
+    valueOfNode = givenValue;
     next = null;
   }
 }
@@ -58,11 +62,10 @@ public class MergeSortLinkedList {
     ListNode pl = l; // pl stands for "pointer for left"
     ListNode pr = r; // pr stands for "pointer for right"
  
-    ListNode metaHead = new ListNode(100);
+    ListNode metaHead = new ListNode(0);
     ListNode pm = metaHead; // pm stands for "pointer for merged"
  
     while (pl != null || pr != null) {
- 
       if (pl == null) {
         pm.next = new ListNode(pr.val);
         pr = pr.next;
@@ -82,7 +85,6 @@ public class MergeSortLinkedList {
           pm = pm.next.next;
           pl = pl.next;
           pr = pr.next;
-    
         } else {
           pm.next = new ListNode(pr.val);
           pr = pr.next;
@@ -106,24 +108,24 @@ public class MergeSortLinkedList {
   }
   
   public static void main(String[] args) {
-      // Generate a sample input [2, 3, 4, 3, 4, 5]
+    // Generate a sample input [2, 3, 4, 3, 4, 5]
     ListNode n1 = new ListNode(2);
     ListNode n2 = new ListNode(3);
     ListNode n3 = new ListNode(4);
     ListNode n4 = new ListNode(3);
     ListNode n5 = new ListNode(4);
     ListNode n6 = new ListNode(5);
- 
+    
     n1.next = n2;
     n2.next = n3;
     n3.next = n4;
     n4.next = n5;
     n5.next = n6;
         
-        // Merge sort the sample input
+    // Merge sort the sample input
     n1 = mergeSortList(n1);
     
-        // Print out result
+    // Print out result
     printList(n1);
   }
 }
