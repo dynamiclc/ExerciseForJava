@@ -1,4 +1,4 @@
-package algorithm.mergesort;
+package algorithm.mergesortlinkedlist;
  
 // Class definition for ListNode
 class ListNode {
