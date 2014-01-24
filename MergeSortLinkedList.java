@@ -1,19 +1,6 @@
 package algorithm.mergesort;
- 
-// Class definition for a node in the list
-class ListNode {
-  // value in current node
-  int valueOfNode;
-  
-  // Next node
-  ListNode next;
-  
-  // Constructor of a single node
-  ListNode(int givenValue) {
-    valueOfNode = givenValue;
-    next = null;
-  }
-}
+
+import datastructure.listnode.ListNode;
  
 public class MergeSortLinkedList {
   // Merge sort
@@ -34,7 +21,7 @@ public class MergeSortLinkedList {
     // Divide the list
     int middle = count / 2;
     
-    ListNode l = head, r = null; // l stands for left, r stands for right
+    ListNode pLeft = head, pRight = null; // pLeft stands for left, pRight stands for right
     p = head;
     int countHalf = 0;
     while (p != null) {
@@ -43,52 +30,54 @@ public class MergeSortLinkedList {
  
       if (countHalf == middle) {
         p.next = null;
-        r = next;
+        pRight = next;
       }
       p = next;
     }
  
     // Recursively sort two parts
-    ListNode h1 = mergeSortList(l);
-    ListNode h2 = mergeSortList(r);
+    ListNode pHeadLeft = mergeSortList(pLeft);
+    ListNode pHeadRight = mergeSortList(pRight);
  
     // Merge together the two parts
-    ListNode merged = merge(h1, h2);
+    ListNode merged = merge(pHeadLeft, pHeadRight);
  
     return merged;
   }
  
-  public static ListNode merge(ListNode l, ListNode r) {
-    ListNode pl = l; // pl stands for "pointer for left"
-    ListNode pr = r; // pr stands for "pointer for right"
+  public static ListNode merge(ListNode pLeftInput, ListNode pRightInput) {
+    ListNode pLeft = pLeftInput; // pLeft stands for "pointer for left"
+    ListNode pRight = pRightInput; // pRight stands for "pointer for right"
  
     ListNode metaHead = new ListNode(0);
-    ListNode pm = metaHead; // pm stands for "pointer for merged"
+    ListNode pMerged = metaHead; // pMerged stands for "pointer for merged"
  
-    while (pl != null || pr != null) {
-      if (pl == null) {
-        pm.next = new ListNode(pr.val);
-        pr = pr.next;
-        pm = pm.next;
-      } else if (pr == null) {
-        pm.next = new ListNode(pl.val);
-        pl = pl.next;
-        pm = pm.next;
+    while (pLeft != null || pRight != null) {
+ 
+      if (pLeft == null) {
+        pMerged.next = new ListNode(pRight.val);
+        pRight = pRight.next;
+        pMerged = pMerged.next;
+      } else if (pRight == null) {
+        pMerged.next = new ListNode(pLeft.val);
+        pLeft = pLeft.next;
+        pMerged = pMerged.next;
       } else {
-        if (pl.val < pr.val) {
-          pm.next = new ListNode(pl.val);
-          pl = pl.next;
-          pm = pm.next;
-        } else if (pl.val == pr.val) {
-          pm.next = new ListNode(pl.val);
-          pm.next.next = new ListNode(pl.val);
-          pm = pm.next.next;
-          pl = pl.next;
-          pr = pr.next;
+        if (pLeft.val < pRight.val) {
+          pMerged.next = new ListNode(pLeft.val);
+          pLeft = pLeft.next;
+          pMerged = pMerged.next;
+        } else if (pLeft.val == pRight.val) {
+          pMerged.next = new ListNode(pLeft.val);
+          pMerged.next.next = new ListNode(pLeft.val);
+          pMerged = pMerged.next.next;
+          pLeft = pLeft.next;
+          pRight = pRight.next;
+    
         } else {
-          pm.next = new ListNode(pr.val);
-          pr = pr.next;
-          pm = pm.next;
+          pMerged.next = new ListNode(pRight.val);
+          pRight = pRight.next;
+          pMerged = pMerged.next;
         }
       }
     }
@@ -96,7 +85,7 @@ public class MergeSortLinkedList {
     return metaHead.next;
   }
   
-    public static void printList(ListNode x) {
+  public static void printList(ListNode x) {
     if (x != null) {
       System.out.print(x.val + " ");
       while (x.next != null) {
@@ -108,19 +97,17 @@ public class MergeSortLinkedList {
   }
   
   public static void main(String[] args) {
-    // Generate a sample input [2, 3, 4, 3, 4, 5]
+    // Generate a sample input [2, 3, 4, 3, 4]
     ListNode n1 = new ListNode(2);
     ListNode n2 = new ListNode(3);
     ListNode n3 = new ListNode(4);
     ListNode n4 = new ListNode(3);
     ListNode n5 = new ListNode(4);
-    ListNode n6 = new ListNode(5);
-    
+ 
     n1.next = n2;
     n2.next = n3;
     n3.next = n4;
     n4.next = n5;
-    n5.next = n6;
         
     // Merge sort the sample input
     n1 = mergeSortList(n1);
