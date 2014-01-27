@@ -1,6 +1,7 @@
 package main;
 
 import problem.mergesort.*;
+import problem.twosum.*;
 import datastructure.listnode.*;
 
 public class Main {
@@ -13,12 +14,12 @@ public class Main {
   }
   
   public static void MergeSortLinkedList() {
-	System.out.println("==============================\n");
-	System.out.println("PROBLEM Merge-sort Linked List\n");
-	System.out.println("==============================\n");
+	System.out.println("==============================");
+	System.out.println("PROBLEM Merge-sort Linked List");
+	System.out.println("==============================");
 	
 	// Generate a sample input [4, 2, 5, 3, 6]
-	System.out.println("Generate a sample input [4, 2, 5, 3, 6]\n");
+	System.out.println("Generate a sample input [4, 2, 5, 3, 6]");
     ListNode nodeFirst = new ListNode(4);
     ListNode nodeSecond = new ListNode(2);
     ListNode nodeThird = new ListNode(5);
@@ -37,23 +38,35 @@ public class Main {
     // Print out result
     MergeSortLinkedList.printList(nodeFirst);
 	
-	System.out.println("\n\n");
+	System.out.println("");
   }
   
   public static void TwoSum() {
-	System.out.println("===============\n");
-	System.out.println("PROBLEM Two Sum\n");
-	System.out.println("===============\n");
+	System.out.println("===============");
+	System.out.println("PROBLEM Two Sum");
+	System.out.println("===============");
 	
 	// Generate a sample input
-	// numbers={2, 7, 11, 15}, target=9
-	System.out.println("Generate a sample input\n");
-    System.out.println("numbers={2, 7, 11, 15}, target=9\n");
-        
-    // Merge sort the sample input
+	// numbers={2, 3, 3, 2, 4, 1}, target=5
+	System.out.println("Generate a sample input");
+    System.out.println("numbers={2, 3, 3, 2, 4, 1}, target=5");
+    int[] intArrayTwoSum = new int[7];
+    intArrayTwoSum[0] = 2;
+    intArrayTwoSum[1] = 3;
+    intArrayTwoSum[2] = 3;
+    intArrayTwoSum[3] = 2;
+    intArrayTwoSum[5] = 4;
+    intArrayTwoSum[6] = 1;
     
-    // Print output
+    int targetTwoSum = 5;
     
-	System.out.println("\n\n");
+    // Calculate two sum 
+    int[] resultTwoSum = new int[2];
+    resultTwoSum = TwoSum.twoSum(intArrayTwoSum, targetTwoSum);
+    
+    // Print output    
+    System.out.println("The result is index1=" + resultTwoSum[0] + ", index2="
+                       + resultTwoSum[1]);
+	System.out.println("");
   }
 }
